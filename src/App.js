@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { Provider } from "react-redux";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Login from "./components/auth/Login";
+import SignUp from "./components/auth/SignUp";
+import store from "./redux/store";
+import { AuthProvider } from "./contexts/AuthContext";
+// import ProtectedRoute from "./ProtectedRoute";
+import { auth } from "./firebase";
+import Gallery from "./components/Gallery";
 
 function App() {
+  auth.onAuthStateChanged((user) => {
+    localStorage.setItem("user", JSON.stringify(user));
+  });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Provider store={store}>
+        <AuthProvider>
+          <Router>
+            <Routes>
+              <Route path="/" element={<Login />} />
+              <Route path="/sign-up" element={<SignUp />} />
+              <Route path="/gallery" element={<Gallery />} />
+            </Routes>
+          </Router>
+        </AuthProvider>
+      </Provider>
     </div>
   );
 }
