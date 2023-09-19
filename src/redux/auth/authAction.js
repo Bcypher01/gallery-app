@@ -38,20 +38,6 @@ export const login = (email, password) => {
     }
   };
 };
-//     auth
-//       .signInWithEmailAndPassword(email, password)
-//       .then(() => {
-//         dispatch({ type: LOGIN_SUCCESS });
-//         // history.push("/chat")
-//       })
-//       .catch((error) => {
-//         dispatch({
-//           type: AUTH_FAIL,
-//           message: error.message,
-//         });
-//       });
-//   };
-// };
 
 export const firebaseSignup = (email, password) => {
   return async (dispatch) => {
@@ -72,14 +58,4 @@ export const signOut = () => {
       dispatch({ type: AUTH_FAIL });
     }
   };
-  // return auth
-  //   .signOut()
-  //   .then(function () {
-  //     // Sign-out successful.
-  //     Navigate("/");
-  //     localStorage.removeItem("user");
-  //   })
-  //   .catch(function (error) {
-  //     // An error happened.
-  //   });
 };
