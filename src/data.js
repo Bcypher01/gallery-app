@@ -41,6 +41,11 @@ const Data = [
     title: "Skyscrapper",
     img: "https://images.unsplash.com/photo-1694977523636-d6b239a59e76?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80",
   },
+  {
+    id: uuidv4(),
+    title: "Gotham-pastries",
+    img: "https://images.unsplash.com/photo-1694807865565-70252084fa27?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1372&q=80",
+  },
 ];
 
 export default Data;
