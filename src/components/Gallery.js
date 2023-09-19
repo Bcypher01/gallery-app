@@ -44,7 +44,7 @@ const Gallery = () => {
       </div>
       <div className="grid place-items-center py-2">
         <input
-          className="shadow appearance-none border border-gray-500 w-[50%] rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow appearance-none border border-gray-500 w-[50vw] rounded py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
           placeholder="Search..."
           onChange={(e) => setQuery(e.target.value.toLowerCase())}
         />
