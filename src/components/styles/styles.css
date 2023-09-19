@@ -31,7 +31,7 @@ picutre {
 
 main {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
   gap: 2rem;
   cursor: pointer;
   padding: 1.5em 0;

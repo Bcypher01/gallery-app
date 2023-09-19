@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 
 const Gallery = () => {
   const [images, setImages] = useState(galleryList);
+  const [query, setQuery] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -41,17 +42,26 @@ const Gallery = () => {
           Logout
         </p>
       </div>
+      <div className="mx-auto grid place-items-center py-2">
+        <input
+          className="shadow appearance-none border border-gray-500 w-[50vw] rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+          placeholder="Search..."
+          onChange={(e) => setQuery(e.target.value.toLowerCase())}
+        />
+      </div>
       <main className="mx-12">
         {React.Children.toArray(
-          images.map((image, index) => (
-            <Card
-              src={image.img}
-              title={image.title}
-              id={image.id}
-              index={index}
-              moveImage={moveImage}
-            />
-          ))
+          images
+            .filter((asd) => asd.title.toLowerCase().includes(query))
+            .map((image, index) => (
+              <Card
+                src={image.img}
+                title={image.title}
+                id={image.id}
+                index={index}
+                moveImage={moveImage}
+              />
+            ))
         )}
       </main>
     </>
