@@ -108,7 +108,9 @@ function SignUp() {
                   <div className="text-center mt-5">
                     <p className="text-grey-100 hover:text-black text-md">
                       Already have an account?
-                      <Link to="/" className="no-underline font-semibold">
+                      <Link
+                        to="/"
+                        className="no-underline text-blue-400 font-semibold">
                         Sign in
                       </Link>
                       .

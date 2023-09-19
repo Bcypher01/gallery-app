@@ -65,13 +65,21 @@ export const firebaseSignup = (email, password) => {
 };
 
 export const signOut = () => {
-  return auth
-    .signOut()
-    .then(function () {
-      // Sign-out successful.
-      localStorage.removeItem("user");
-    })
-    .catch(function (error) {
-      // An error happened.
-    });
+  return async (dispatch) => {
+    try {
+      await auth.signOut();
+    } catch {
+      dispatch({ type: AUTH_FAIL });
+    }
+  };
+  // return auth
+  //   .signOut()
+  //   .then(function () {
+  //     // Sign-out successful.
+  //     Navigate("/");
+  //     localStorage.removeItem("user");
+  //   })
+  //   .catch(function (error) {
+  //     // An error happened.
+  //   });
 };

@@ -109,7 +109,9 @@ function Login() {
                 <div className="text-center mt-5">
                   <p className="text-grey-100 hover:text-black text-md">
                     Don't have an account? &nbsp;
-                    <Link to="/sign-up" className="no-underline font-semibold">
+                    <Link
+                      to="/sign-up"
+                      className="no-underline text-blue-400 font-semibold">
                       Create an Account
                     </Link>
                     .
