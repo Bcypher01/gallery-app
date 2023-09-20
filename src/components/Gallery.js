@@ -1,7 +1,7 @@
-import React, { useCallback, useState } from "react";
+import React, { useRef, useState } from "react";
 import galleryList from "../data.js";
 import "./styles/styles.css";
-import { Card } from "./Card.js";
+// import { Card } from "./Card.js";
 import { signOut } from "../redux/auth/authAction.js";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
@@ -12,15 +12,28 @@ const Gallery = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const moveImage = useCallback((dragIndex, hoverIndex) => {
-    setImages((prevCards) => {
-      const clonedCards = [...prevCards];
-      const removedItem = clonedCards.splice(dragIndex, 1)[0];
+  const dragItem = useRef();
+  const dragOverItem = useRef();
 
-      clonedCards.splice(hoverIndex, 0, removedItem);
-      return clonedCards;
-    });
-  }, []);
+  const dragStart = (e, position) => {
+    dragItem.current = position;
+    console.log(e.target.innerHTML);
+  };
+
+  const dragEnter = (e, position) => {
+    dragOverItem.current = position;
+    console.log(e.target.innerHTML);
+  };
+
+  const drop = (e) => {
+    const copyListItems = [...images];
+    const dragItemContent = copyListItems[dragItem.current];
+    copyListItems.splice(dragItem.current, 1);
+    copyListItems.splice(dragOverItem.current, 0, dragItemContent);
+    dragItem.current = null;
+    dragOverItem.current = null;
+    setImages(copyListItems);
+  };
 
   const logOut = () => {
     dispatch(signOut()).then(() => {
@@ -54,13 +67,14 @@ const Gallery = () => {
           images
             .filter((asd) => asd.title.toLowerCase().includes(query))
             .map((image, index) => (
-              <Card
-                src={image.img}
-                title={image.title}
-                id={image.id}
-                index={index}
-                moveImage={moveImage}
-              />
+              <div
+                onDragStart={(e) => dragStart(e, index)}
+                onDragEnter={(e) => dragEnter(e, index)}
+                onDragEnd={drop}
+                key={index}
+                draggable>
+                <img src={image.img} alt={index} />
+              </div>
             ))
         )}
       </main>
