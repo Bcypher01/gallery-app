@@ -31,7 +31,8 @@ function Login() {
             dispatch(loginSuccess(userCredential.user));
           })
           .catch((error) => {
-            setErrorMessage(error.message);
+            let e = error.message;
+            setErrorMessage(e.slice(9));
             dispatch(loginFail());
           });
         dispatch(load());
