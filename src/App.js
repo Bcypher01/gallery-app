@@ -7,8 +7,6 @@ import { AuthProvider } from "./contexts/AuthContext";
 import ProtectedRoute from "./ProtectedRoute";
 import { auth } from "./firebase";
 import Gallery from "./components/Gallery";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
 
 function App() {
   auth.onAuthStateChanged((user) => {
@@ -18,23 +16,21 @@ function App() {
     <div>
       <Provider store={store}>
         <AuthProvider>
-          <DndProvider backend={HTML5Backend}>
-            <Router>
-              <Routes>
-                <Route path="/" element={<Login />} />
-                <Route path="/sign-up" element={<SignUp />} />
+          <Router>
+            <Routes>
+              <Route path="/" element={<Login />} />
+              <Route path="/sign-up" element={<SignUp />} />
 
-                <Route
-                  path="/gallery"
-                  element={
-                    <ProtectedRoute>
-                      <Gallery />
-                    </ProtectedRoute>
-                  }
-                />
-              </Routes>
-            </Router>
-          </DndProvider>
+              <Route
+                path="/gallery"
+                element={
+                  <ProtectedRoute>
+                    <Gallery />
+                  </ProtectedRoute>
+                }
+              />
+            </Routes>
+          </Router>
         </AuthProvider>
       </Provider>
     </div>
