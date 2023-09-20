@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 
-export const Card = ({ src, title, id, index, moveImage }) => {
+export const Card = ({ src, title, id, index, moveImage, loading }) => {
   const ref = useRef(null);
 
   const [, drop] = useDrop({
