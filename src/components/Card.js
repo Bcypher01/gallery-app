@@ -1,62 +1,72 @@
 // import React, { useRef } from "react";
 // import { useDrag, useDrop } from "react-dnd";
 
-// export const Card = ({ src, title, id, index, moveImage }) => {
-//   const ref = useRef(null);
+import { useDroppable } from "@dnd-kit/core";
 
-//   const [, drop] = useDrop({
-//     accept: "image",
-//     hover: (item, monitor) => {
-//       if (!ref.current) {
-//         return;
-//       }
-//       const dragIndex = item.index;
-//       const hoverIndex = index;
+export const Card = ({ src, title, id, index, moveImage }) => {
+  //   const ref = useRef(null);
 
-//       if (dragIndex === hoverIndex) {
-//         return;
-//       }
+  //   const [, drop] = useDrop({
+  //     accept: "image",
+  //     hover: (item, monitor) => {
+  //       if (!ref.current) {
+  //         return;
+  //       }
+  //       const dragIndex = item.index;
+  //       const hoverIndex = index;
 
-//       const hoverBoundingRect = ref.current?.getBoundingClientRect();
+  //       if (dragIndex === hoverIndex) {
+  //         return;
+  //       }
 
-//       const hoverMiddleY =
-//         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+  //       const hoverBoundingRect = ref.current?.getBoundingClientRect();
 
-//       const clientOffset = monitor.getClientOffset();
-//       const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+  //       const hoverMiddleY =
+  //         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
 
-//       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-//         return;
-//       }
+  //       const clientOffset = monitor.getClientOffset();
+  //       const hoverClientY = clientOffset.y - hoverBoundingRect.top;
 
-//       if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-//         return;
-//       }
+  //       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+  //         return;
+  //       }
 
-//       moveImage(dragIndex, hoverIndex);
+  //       if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+  //         return;
+  //       }
 
-//       item.index = hoverIndex;
-//     },
-//   });
+  //       moveImage(dragIndex, hoverIndex);
 
-//   const [{ isDragging }, drag] = useDrag({
-//     type: "image",
-//     item: () => {
-//       return { id, index };
-//     },
-//     collect: (monitor) => {
-//       return {
-//         isDragging: monitor.isDragging(),
-//       };
-//     },
-//   });
+  //       item.index = hoverIndex;
+  //     },
+  //   });
 
-//   const opacity = isDragging ? 0 : 1;
-//   drag(drop(ref));
+  //   const [{ isDragging }, drag] = useDrag({
+  //     type: "image",
+  //     item: () => {
+  //       return { id, index };
+  //     },
+  //     collect: (monitor) => {
+  //       return {
+  //         isDragging: monitor.isDragging(),
+  //       };
+  //     },
+  //   });
 
-//   return (
-//     <div ref={ref} style={{ opacity }} className="card">
-//       <img src={src} alt={title} />
-//     </div>
-//   );
-// };
+  //   const opacity = isDragging ? 0 : 1;
+  //   drag(drop(ref));
+
+  function Droppable(props) {
+    const { setNodeRef } = useDroppable({
+      id: props.id,
+    });
+
+    return <div ref={setNodeRef}>{props.children}</div>;
+  }
+
+  return (
+    <div className="card">
+      <img src={src} alt={title} />
+    </div>
+  );
+};
