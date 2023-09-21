@@ -32,8 +32,8 @@ const UploadGallery = () => {
       onDragEnd={handleDragEnd}
       onDragCancel={handleDragCancel}>
       <SortableContext items={items} strategy={rectSortingStrategy}>
-        <div className="py-12 grid place-items-center">
-          <h1 className="text-5xl">Welcome to The Gallery</h1>
+        <div className="py-12 px-8 grid place-items-center">
+          <h1 className="text-3xl md:text-5xl">Welcome to The Gallery</h1>
           <p className="py-4 text-xl">
             Feel free to shuffle images as you please
           </p>
