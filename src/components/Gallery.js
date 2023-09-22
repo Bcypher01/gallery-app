@@ -23,6 +23,8 @@ const UploadGallery = () => {
   const [items, setItems] = useState(data);
   const [activeId, setActiveId] = useState(null);
   const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor));
+  const [query, setQuery] = useState("");
+  const [searchParam] = useState(["title"]);
 
   return (
     <DndContext
@@ -37,9 +39,22 @@ const UploadGallery = () => {
           <p className="py-4 px-4 md:text-xl">
             Feel free to shuffle images as you please
           </p>
+          <input
+            type="search"
+            name="search-form"
+            id="search-form"
+            placeholder="Search for..."
+            className="w-[50vw] shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            value={query}
+            /*
+            // set the value of our useState q
+            //  anytime the user types in the search box
+            */
+            onChange={(e) => setQuery(e.target.value)}
+          />
         </div>
         <Grid columns={4}>
-          {items.map((url, index) => (
+          {search(items).map((url, index) => (
             <SortableImages key={url.id} url={url.img} index={index} />
           ))}
         </Grid>
@@ -52,6 +67,16 @@ const UploadGallery = () => {
       </DragOverlay>
     </DndContext>
   );
+  function search(items) {
+    return items.filter((item) => {
+      return searchParam.some((newItem) => {
+        return (
+          item[newItem].toString().toLowerCase().indexOf(query.toLowerCase()) >
+          -1
+        );
+      });
+    });
+  }
 
   function handleDragStart(event) {
     setActiveId(event.active.id);

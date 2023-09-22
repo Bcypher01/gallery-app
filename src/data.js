@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 const data = [
   {
     id: uuidv4(),
-    title: "Travel",
+    title: "Art",
     img: "https://media.istockphoto.com/photos/beautiful-view-of-amazing-sandstone-formations-in-famous-lower-near-picture-id807387518?k=20&m=807387518&s=612x612&w=0&h=G8O867Id71Sk6LCiAnAYp-dIu9uf4YqlfnO3uj-SQ00=",
   },
   {
@@ -23,7 +23,7 @@ const data = [
   },
   {
     id: uuidv4(),
-    title: "Art",
+    title: "Art work",
     img: "https://images.unsplash.com/photo-1695010801799-3543da0c0059?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80",
   },
   {
