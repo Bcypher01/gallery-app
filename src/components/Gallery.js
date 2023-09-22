@@ -17,10 +17,10 @@ import {
 import { Grid } from "./Grid";
 import { SortableImages } from "./SortableImages";
 import { Image } from "./Image";
-import photos from "../photo.json";
+import data from "../data";
 
 const UploadGallery = () => {
-  const [items, setItems] = useState(photos);
+  const [items, setItems] = useState(data);
   const [activeId, setActiveId] = useState(null);
   const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor));
 
@@ -40,7 +40,7 @@ const UploadGallery = () => {
         </div>
         <Grid columns={4}>
           {items.map((url, index) => (
-            <SortableImages key={url} url={url} index={index} />
+            <SortableImages key={url.id} url={url.img} index={index} />
           ))}
         </Grid>
       </SortableContext>
@@ -62,9 +62,8 @@ const UploadGallery = () => {
 
     if (active.id !== over.id) {
       setItems((items) => {
-        const oldIndex = items.indexOf(active.id);
-        const newIndex = items.indexOf(over.id);
-
+        const oldIndex = items.findIndex((item) => item.img === active.id);
+        const newIndex = items.findIndex((item) => item.img === over.id);
         return arrayMove(items, oldIndex, newIndex);
       });
     }
